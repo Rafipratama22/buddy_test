@@ -27,6 +27,11 @@ const docTemplate_swagger = `{
     "paths": {
         "/company/post": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "All Post from the app that has been posted",
                 "consumes": [
                     "*/*"
@@ -59,6 +64,11 @@ const docTemplate_swagger = `{
         },
         "/company/post/:id": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "All Post from the app that has been posted",
                 "consumes": [
                     "*/*"
@@ -94,6 +104,11 @@ const docTemplate_swagger = `{
         },
         "/company/user/:id": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves detail one user",
                 "consumes": [
                     "*/*"
@@ -130,6 +145,11 @@ const docTemplate_swagger = `{
                 }
             },
             "patch": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves update point on one post",
                 "consumes": [
                     "*/*"
@@ -174,6 +194,11 @@ const docTemplate_swagger = `{
         },
         "/company/user/login": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves the list of users who has to login in the app",
                 "consumes": [
                     "*/*"
@@ -206,6 +231,11 @@ const docTemplate_swagger = `{
         },
         "/company/user/point": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves all users point",
                 "consumes": [
                     "*/*"
@@ -235,6 +265,11 @@ const docTemplate_swagger = `{
         },
         "/company/user/point/:id": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves detail point from one user",
                 "consumes": [
                     "*/*"
@@ -273,6 +308,11 @@ const docTemplate_swagger = `{
         },
         "/company/user/register": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves the list of users who has to register in the app",
                 "consumes": [
                     "*/*"
@@ -425,6 +465,11 @@ const docTemplate_swagger = `{
         },
         "/post": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves the list of users who has to register in the app",
                 "consumes": [
                     "*/*"
@@ -454,6 +499,11 @@ const docTemplate_swagger = `{
         },
         "/post/:id": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "All Post from the app that has been posted",
                 "consumes": [
                     "*/*"
@@ -487,6 +537,11 @@ const docTemplate_swagger = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "All Post from the app that has been posted",
                 "consumes": [
                     "*/*"
@@ -522,6 +577,11 @@ const docTemplate_swagger = `{
         },
         "/user/point": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves all users point",
                 "consumes": [
                     "*/*"

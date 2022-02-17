@@ -37,6 +37,7 @@ func NewCompanyController(companyRepo repository.CompanyRepository) CompanyContr
 // @Tags Company
 // @Accept  */*
 // @Produce  json
+// @Security ApiKeyAuth
 // @Success 200 {array} entity.User
 // @Failure 400 {object} dto.ErrorResponse
 // @Router /company/user/register [get]
@@ -57,6 +58,7 @@ func (c *companyController) AllUserRegister(ctx *gin.Context) {
 // @Tags Company
 // @Accept  */*
 // @Produce  json
+// @Security ApiKeyAuth
 // @Success 200 {array} entity.User
 // @Failure 400 {object} dto.ErrorResponse
 // @Router /company/user/login [get]
@@ -77,6 +79,7 @@ func (c *companyController) AllUserLogin(ctx *gin.Context) {
 // @Tags Company
 // @Accept  */*
 // @Produce  json
+// @Security ApiKeyAuth
 // @Success 200 {integer} point
 // @Failure 400 {object} dto.ErrorResponse
 // @Router /company/user/point [get]
@@ -98,6 +101,7 @@ func (c *companyController) AllUserPoint(ctx *gin.Context) {
 // @Accept  */*
 // @Produce  json
 // @Param id path string true "User Id"
+// @Security ApiKeyAuth
 // @Success 200 {object} entity.User
 // @Failure 400 {object} dto.ErrorResponse
 // @Router /company/user/:id [get]
@@ -120,6 +124,7 @@ func (c *companyController) DetailUser(ctx *gin.Context) {
 // @Tags Company
 // @Accept  */*
 // @Produce  json
+// @Security ApiKeyAuth
 // @Param id path string true "User Id"
 // @Success 200 {integer} point
 // @Failure 400 {object} dto.ErrorResponse
@@ -143,6 +148,7 @@ func (c *companyController) DetailUserPoint(ctx *gin.Context) {
 // @Tags Company
 // @Accept  */*
 // @Produce  json
+// @Security ApiKeyAuth
 // @Param id path integer true "Post Id"
 // @Success 200 {object} entity.Post 
 // @Failure 400 {object} dto.ErrorResponse
@@ -174,6 +180,7 @@ func (c *companyController) PostPoint(ctx *gin.Context) {
 // @Tags Company
 // @Accept  */*
 // @Produce  json
+// @Security ApiKeyAuth
 // @Success 200 {array} entity.Post
 // @Failure 400 {object} dto.ErrorResponse
 // @Router /company/post [get]
@@ -194,6 +201,7 @@ func (c *companyController) AllPost(ctx *gin.Context) {
 // @Tags Company
 // @Accept  */*
 // @Produce  json
+// @Security ApiKeyAuth
 // @Success 200 {object} entity.Post
 // @Failure 400 {object} dto.ErrorResponse
 // @Failure 500 {object} dto.ErrorResponse

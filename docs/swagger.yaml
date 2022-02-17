@@ -165,6 +165,8 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
       summary: All Post from the app that has been posted
       tags:
       - Company
@@ -188,6 +190,8 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
       summary: All Post from the app that has been posted
       tags:
       - Company
@@ -213,6 +217,8 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
       summary: Retrieves detail one user
       tags:
       - Company
@@ -241,6 +247,8 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
       summary: Retrieves update point on one post
       tags:
       - Company
@@ -262,6 +270,8 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
       summary: Retrieves the list of users who has to login in the app
       tags:
       - Company
@@ -281,6 +291,8 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
       summary: Retrieves all users point
       tags:
       - Company
@@ -306,6 +318,8 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
       summary: Retrieves detail point from one user
       tags:
       - Company
@@ -327,6 +341,8 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
       summary: Retrieves the list of users who has to register in the app
       tags:
       - Company
@@ -424,6 +440,8 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
       summary: Retrieves the list of users who has to register in the app
       tags:
       - Post
@@ -447,6 +465,8 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
       summary: All Post from the app that has been posted
       tags:
       - Post
@@ -469,6 +489,8 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
       summary: All Post from the app that has been posted
       tags:
       - Post
@@ -488,6 +510,8 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
       summary: Retrieves all users point
       tags:
       - Users

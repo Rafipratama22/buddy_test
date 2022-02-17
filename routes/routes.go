@@ -51,6 +51,9 @@ func MainSever() *Server {
 // @host localhost:8080
 // @BasePath /
 // @schemes http
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authurization
 func (server *Server) Start() *gin.Engine {
 	// Gin instance
 	route := gin.New()

@@ -23,6 +23,11 @@
     "paths": {
         "/company/post": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "All Post from the app that has been posted",
                 "consumes": [
                     "*/*"
@@ -55,6 +60,11 @@
         },
         "/company/post/:id": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "All Post from the app that has been posted",
                 "consumes": [
                     "*/*"
@@ -90,6 +100,11 @@
         },
         "/company/user/:id": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves detail one user",
                 "consumes": [
                     "*/*"
@@ -126,6 +141,11 @@
                 }
             },
             "patch": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves update point on one post",
                 "consumes": [
                     "*/*"
@@ -170,6 +190,11 @@
         },
         "/company/user/login": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves the list of users who has to login in the app",
                 "consumes": [
                     "*/*"
@@ -202,6 +227,11 @@
         },
         "/company/user/point": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves all users point",
                 "consumes": [
                     "*/*"
@@ -231,6 +261,11 @@
         },
         "/company/user/point/:id": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves detail point from one user",
                 "consumes": [
                     "*/*"
@@ -269,6 +304,11 @@
         },
         "/company/user/register": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves the list of users who has to register in the app",
                 "consumes": [
                     "*/*"
@@ -421,6 +461,11 @@
         },
         "/post": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves the list of users who has to register in the app",
                 "consumes": [
                     "*/*"
@@ -450,6 +495,11 @@
         },
         "/post/:id": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "All Post from the app that has been posted",
                 "consumes": [
                     "*/*"
@@ -483,6 +533,11 @@
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "All Post from the app that has been posted",
                 "consumes": [
                     "*/*"
@@ -518,6 +573,11 @@
         },
         "/user/point": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves all users point",
                 "consumes": [
                     "*/*"

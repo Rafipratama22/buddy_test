@@ -34,6 +34,7 @@ func NewPostController(postRepo repository.PostRepository) PostController {
 // @Tags Post
 // @Accept  */*
 // @Produce  json
+// @Security ApiKeyAuth
 // @Success 201 {object} entity.Post
 // @Failure 400 {object} dto.ErrorResponse
 // @Router /post [post]
@@ -62,6 +63,7 @@ func (c *postController) CreatePost(ctx *gin.Context) {
 // @Tags Post
 // @Accept  */*
 // @Produce  json
+// @Security ApiKeyAuth
 // @Success 200 {object} entity.Post
 // @Failure 404 {object} dto.ErrorResponse
 // @Failure 500 {object} dto.ErrorResponse
@@ -88,6 +90,7 @@ func (c *postController) DetailPost(ctx *gin.Context) {
 // @Tags Post
 // @Accept  */*
 // @Produce  json
+// @Security ApiKeyAuth
 // @Success 200 {object} entity.Post
 // @Failure 400 {object} dto.ErrorResponse
 // @Failure 500 {object} dto.ErrorResponse

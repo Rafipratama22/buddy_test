@@ -30,6 +30,7 @@ func NewUserController(userRepo repository.UserRepository) UserController {
 // @Tags Users
 // @Accept  */*
 // @Produce  json
+// @Security ApiKeyAuth
 // @Success 200 {integer} point
 // @Failure 400 {object} dto.ErrorResponse
 // @Router /user/point [get] 
