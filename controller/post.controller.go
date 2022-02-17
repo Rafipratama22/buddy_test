@@ -97,12 +97,15 @@ func (c *postController) DetailPost(ctx *gin.Context) {
 // @Router /post/:id [put]
 func (c *postController) UpdatePost(ctx *gin.Context) {
 	var errResponse dto.ErrorResponse
+	var post entity.Post
+	authorId := ctx.MustGet("user_id")
+	userId := uuid.MustParse(authorId.(string))
+	post.AuthorID = userId
 	id, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
 		errResponse.Message = "Failed to convert id to int"
 		ctx.JSON(http.StatusInternalServerError, errResponse)
 	}
-	var post entity.Post
 	err = ctx.ShouldBindJSON(&post)
 	if err != nil {
 		panic(err)
