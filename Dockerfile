@@ -1,6 +1,6 @@
 FROM golang:1.16-alpine
 
-WORKDIR /home/sprout/Documents/Go/mnc_test
+WORKDIR /home/sprout/Documents/Go/buddy_test
 
 COPY go.mod ./
 COPY go.sum ./
@@ -8,8 +8,8 @@ RUN go mod download
 
 COPY ./ ./
 
-RUN go build -o /docker/mnc_test
+RUN go build -o /docker/buddy_test
 
 EXPOSE 8080
 
-CMD ["/docker/mnc_test"]
+CMD ["/docker/buddy_test"]

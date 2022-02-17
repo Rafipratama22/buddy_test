@@ -18,7 +18,7 @@ func SetUpDatabase() *gorm.DB{
 	db_host := os.Getenv("DB_HOST")
 	db_port := os.Getenv("DB_PORT")
 
-	dsn := "host=" + db_host + " user=" + db_user + " dbname=" + db_name + " password=" + db_pass + " port=" + db_port
+	dsn := "host=" + db_host + " user=" + db_user + " dbname=" + db_name + " password=" + db_pass + " port=" + db_port + " sslmode=disable"
 	fmt.Println(dsn)
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {

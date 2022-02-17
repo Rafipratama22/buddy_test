@@ -119,7 +119,13 @@ func (c *authMiddleware) ValidateTokenCompany(ctx *gin.Context) {
 		})
 		ctx.Abort()
 	}
-	if claims, err := token.Claims.(jwt.MapClaims); err && token.Valid {
+	if claims, err := token.Claims.(jwt.MapClaims); token.Valid {
+		if !err {
+			ctx.JSON(http.StatusUnauthorized, gin.H{
+				"message": "Youre not authorized",
+			})
+			ctx.Abort()
+		}
 		fmt.Println("claims", claims)
 		for key, val := range claims {
 			if s, ok := val.(string); ok {
@@ -127,13 +133,13 @@ func (c *authMiddleware) ValidateTokenCompany(ctx *gin.Context) {
 			}
 		}
 	}
-	c.db.Model(&user).Where("id = ?", tokenMap["user_id"]).First(&user)
-	ctx.Set("user_id", tokenMap["user_id"])
-	if err != nil {
+	result := c.db.Model(&user).Where("id = ?", tokenMap["user_id"]).First(&user)
+	if result.Error != nil {
 		ctx.JSON(http.StatusUnauthorized, gin.H{
 			"message": "Youre not authorized",
 		})
 		ctx.Abort()
 	}
+	ctx.Set("user_id", tokenMap["user_id"])
 	ctx.Next()
 }
