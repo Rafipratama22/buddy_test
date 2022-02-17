@@ -32,9 +32,11 @@ func NewCompanyController(companyRepo repository.CompanyRepository) CompanyContr
 // All User Register
 // @Summary Retrieves the list of users who has to register in the app
 // @Description Retrieves the list of users who has to register in the app
+// @Tags root
+// @Accept  */*
 // @Produce  json
-// @Success 200 {array} entity.User
-// @Router /api/v1/company/user/register [get]
+// @Success 200 {array} map[string]interface{}
+// @Router /company/user/register [get]
 func (c *companyController) AllUserRegister(ctx *gin.Context) {
 	companyed, err := c.companyRepo.AllUserRegister()
 	if err != nil {
@@ -48,8 +50,8 @@ func (c *companyController) AllUserRegister(ctx *gin.Context) {
 // @Summary Retrieves the list of users who has to login in the app
 // @Description Retrieves the list of users who has to login in the app
 // @Produce  json
-// @Success 200 {array} entity.User
-// @Router /api/v1/company/user/login [get]
+// @Success 200 {array} map[string]interface{}
+// @Router /company/user/login [get]
 func (c *companyController) AllUserLogin(ctx *gin.Context) {
 	companyed, err := c.companyRepo.AllUserLogin()
 	if err != nil {
@@ -64,7 +66,7 @@ func (c *companyController) AllUserLogin(ctx *gin.Context) {
 // @Description Retrieves all users point
 // @Produce  json
 // @Success 200 {integer} point
-
+// @Router /company/user/point [get]
 func (c *companyController) AllUserPoint(ctx *gin.Context) {
 	companyed, err := c.companyRepo.AllUserPoint()
 	if err != nil {

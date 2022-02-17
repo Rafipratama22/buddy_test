@@ -10,7 +10,7 @@ import (
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"gorm.io/gorm"
-	_ "github.com/Rafipratama/mnc_test/docs"
+	_ "github.com/Rafipratama22/mnc_test/docs/mnc_test"
 )
 
 type Server struct {
@@ -35,7 +35,6 @@ func MainSever() *Server {
 		router: gin.New(),
 	}
 }
-
 // @title Gin Swagger Example API
 // @version 2.0
 // @description This is a sample server server.
@@ -48,8 +47,8 @@ func MainSever() *Server {
 // @license.name Apache 2.0
 // @license.url http://www.apache.org/licenses/LICENSE-2.0.html
 
-// @host localhost:3000
-// @BasePath /api/v1
+// @host localhost:8080
+// @BasePath /
 // @schemes http
 func (server *Server) Start() *gin.Engine {
 	// Gin instance
@@ -57,14 +56,16 @@ func (server *Server) Start() *gin.Engine {
 	route.Use(gin.Logger())
 	route.Use(gin.Recovery())
 	apiName := "/api/v1/"
-	route.GET("ping", authMiddleware.ValidateTokenUser, func(ctx *gin.Context) {
+	route.GET(apiName + "ping", authMiddleware.ValidateTokenUser, func(ctx *gin.Context) {
 		ctx.JSON(200, gin.H{
 			"message": "pong",
 		})	
 	})
 
+	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
+	route.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 	// Login Routes
-	loginRoute := route.Group(apiName + "dashboard")
+	loginRoute := route.Group("dashboard")
 	{
 		loginRoute.POST("/register/user", func(ctx *gin.Context) {
 			loginController.RegisterUser(ctx)
@@ -78,7 +79,7 @@ func (server *Server) Start() *gin.Engine {
 	}
 
 	// User Routes
-	userRoute := route.Group(apiName + "user")
+	userRoute := route.Group("user")
 	userRoute.Use(authMiddleware.ValidateTokenUser)
 	{
 		userRoute.GET("/point", func(ctx *gin.Context) {
@@ -87,7 +88,7 @@ func (server *Server) Start() *gin.Engine {
 	}
 
 	// Post Routes
-	postRoute := route.Group(apiName + "post")
+	postRoute := route.Group("post")
 	postRoute.Use(authMiddleware.ValidateTokenUser)
 	{
 		postRoute.POST("/", func(ctx *gin.Context) {
@@ -102,7 +103,7 @@ func (server *Server) Start() *gin.Engine {
 	}
 
 	// Company Routes
-	companyRoute := route.Group(apiName + "company")
+	companyRoute := route.Group("company")
 	companyRoute.Use(authMiddleware.ValidateTokenCompany)
 	{
 		companyRoute.GET("/user/register", func(ctx *gin.Context) {
@@ -124,7 +125,5 @@ func (server *Server) Start() *gin.Engine {
 			companyController.DetailUserPoint(ctx)
 		})
 	}
-	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
-	route.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 	return route
 }
