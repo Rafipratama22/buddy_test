@@ -11,13 +11,14 @@ import (
 )
 
 type CompanyRepository interface {
-	CreateCompany(newcompany entity.Company) (entity.Company, error)
 	AllUserRegister() ([]entity.User, error)
 	AllUserLogin() ([]entity.User, error)
 	AllUserPoint() (int, error)
 	DetailUser(user_id uuid.UUID) (entity.User, error)
 	DetailUserPoint(user_id uuid.UUID) (int, error)
 	PostPoint(id int, point int) (entity.Post, error)
+	AllPost() ([]entity.Post, error)
+	DetailPost(id int) (entity.Post, error)
 }
 
 type companyRepository struct {
@@ -27,20 +28,6 @@ type companyRepository struct {
 func NewCompanyRepo(db *gorm.DB) CompanyRepository {
 	return &companyRepository{
 		db: db,
-	}
-}
-
-func (c *companyRepository) CreateCompany(newcompany entity.Company) (entity.Company, error) {
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(newcompany.Password), bcrypt.DefaultCost)
-	if err != nil {
-		return newcompany, err
-	}
-	newcompany.Password = string(hashedPassword)
-	result := c.db.Create(&newcompany)
-	if result.Error != nil {
-		return newcompany, result.Error
-	} else {
-		return newcompany, nil
 	}
 }
 
@@ -133,3 +120,22 @@ func (c *companyRepository) PostPoint(id int, point int) (entity.Post, error) {
 	return post, nil
 }
 
+func (c *companyRepository) AllPost() ([]entity.Post, error) {
+	var posts []entity.Post
+	result := c.db.Model(&posts).Find(&posts)
+	if result.Error != nil {
+		return posts, result.Error
+	} else {
+		return posts, nil
+	}
+}
+
+func (c *companyRepository) DetailPost(id int) (entity.Post, error) {
+	var post entity.Post
+	result := c.db.Model(&post).Where("id = ?", id).First(&post)
+	if result.Error != nil {
+		return post, result.Error
+	} else {
+		return post, nil
+	}
+} 

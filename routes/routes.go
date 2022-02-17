@@ -10,7 +10,7 @@ import (
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"gorm.io/gorm"
-	_ "github.com/Rafipratama22/mnc_test/docs/mnc_test"
+	_ "github.com/Rafipratama22/mnc_test.git/docs"
 )
 
 type Server struct {
@@ -35,6 +35,7 @@ func MainSever() *Server {
 		router: gin.New(),
 	}
 }
+
 // @title Gin Swagger Example API
 // @version 2.0
 // @description This is a sample server server.
@@ -63,9 +64,8 @@ func (server *Server) Start() *gin.Engine {
 	})
 
 	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
-	route.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 	// Login Routes
-	loginRoute := route.Group("dashboard")
+	loginRoute := route.Group("form")
 	{
 		loginRoute.POST("/register/user", func(ctx *gin.Context) {
 			loginController.RegisterUser(ctx)
@@ -118,12 +118,19 @@ func (server *Server) Start() *gin.Engine {
 		companyRoute.GET("/user/point", func(c *gin.Context) {
 			companyController.AllUserPoint(c)
 		})
-		companyRoute.PATCH("/user/:id", func(ctx *gin.Context) {
-			companyController.PostPoint(ctx)
-		})
 		companyRoute.GET("/user/point/:id", func(ctx *gin.Context) {
 			companyController.DetailUserPoint(ctx)
 		})
+		companyRoute.PATCH("/user/:id", func(ctx *gin.Context) {
+			companyController.PostPoint(ctx)
+		})
+		companyRoute.GET("/post", func(ctx *gin.Context) {
+			companyController.AllPost(ctx)
+		})
+		companyRoute.GET("/post/:id", func(ctx *gin.Context) {
+			companyController.DetailPost(ctx)
+		})
 	}
+	route.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 	return route
 }

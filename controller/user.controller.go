@@ -1,17 +1,16 @@
 package controller
 
 import (
-	"github.com/Rafipratama22/mnc_test.git/entity"
-	"github.com/Rafipratama22/mnc_test.git/repository"
 	"net/http"
+
+	"github.com/Rafipratama22/mnc_test.git/dto"
+	"github.com/Rafipratama22/mnc_test.git/repository"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
 
 type UserController interface {
-	Register(ctx *gin.Context)
-	Login(ctx *gin.Context)
 	GetAllPoint(ctx *gin.Context)
 }
 
@@ -25,40 +24,22 @@ func NewUserController(userRepo repository.UserRepository) UserController {
 	}
 }
 
-func (c *userController) Register(ctx *gin.Context) {
-	var user entity.User
-	err := ctx.ShouldBindJSON(&user)
-	if err != nil {
-		panic(err)
-	}
-	usered, err := c.userRepo.RegisterUser(user)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Failed to Create"})
-	} else {
-		ctx.JSON(http.StatusCreated, usered)
-	}
-}
-
-func (c *userController) Login(ctx *gin.Context) {
-	var user entity.User
-
-	err := ctx.ShouldBindJSON(&user)
-	if err != nil {
-		panic(err)
-	}
-	token, err := c.userRepo.LoginUser(user.Email, user.Password)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err})
-	} else {
-		ctx.JSON(http.StatusOK, gin.H{"token": token})
-	}
-}
-
+// All User Point
+// @Summary Retrieves all users point
+// @Description Retrieves all users point
+// @Tags Users
+// @Accept  */*
+// @Produce  json
+// @Success 200 {integer} point
+// @Failure 400 {object} dto.ErrorResponse
+// @Router /user/point [get] 
 func (c *userController) GetAllPoint(ctx *gin.Context) {
-	user_id := uuid.MustParse(ctx.Param("user_id"))
+	var errResponse dto.ErrorResponse
+	user_id := uuid.MustParse(ctx.MustGet("user_id").(string))
 	point, err := c.userRepo.GetAllPoint(user_id)
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": err})
+		errResponse.Message = "Failed to get all point"
+		ctx.JSON(http.StatusBadRequest, errResponse)
 	} else {
 		ctx.JSON(http.StatusOK, gin.H{"point": point})
 	}

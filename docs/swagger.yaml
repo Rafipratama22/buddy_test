@@ -1,0 +1,496 @@
+basePath: /
+definitions:
+  dto.ErrorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  dto.LoginDto:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      role:
+        type: string
+    required:
+    - email
+    - password
+    - role
+    type: object
+  entity.Company:
+    properties:
+      email:
+        description: |-
+          Company Email
+          @Column(type:varchar(400), nullable:false)
+        type: string
+      id:
+        description: |-
+          Company ID
+          @PrimaryKey
+          @Column(type:uuid, unique: true)
+        type: string
+      is_active:
+        description: |-
+          Company IsActive
+          @Column(type:boolean, default:true)
+        type: boolean
+      name:
+        description: |-
+          Company Name
+          @Column(type:varchar(400), nullable:false)
+        type: string
+      password:
+        description: |-
+          Company Phone
+          @Column(type:varchar(400), nullable:false)
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+  entity.Post:
+    properties:
+      author_id:
+        description: |-
+          Post Author ID
+          @Column(type:uuid, nullable:false)
+        type: string
+      content:
+        description: |-
+          Post Content
+          @Column(type:varchar(400), nullable:false)
+        type: string
+      hastag:
+        description: |-
+          Post Hastag
+          @Column(type:varchar(400), nullable:true)
+        type: string
+      id:
+        description: |-
+          Post ID
+          @PrimaryKey
+          @Column(type:int, unique: true, autoincrement: true)
+        type: integer
+      photo:
+        description: |-
+          Post Photo
+          @Column(type:text, nullable:false)
+        type: string
+      point:
+        description: |-
+          Post Point
+          @Column(type:int, nullable:false, default:0)
+        type: integer
+      source:
+        description: |-
+          Post Source
+          @Column(type:varchar(400), nullable:true)
+        type: string
+      thumbnail:
+        description: |-
+          Post Thumbnaiil
+          @Column(type:text, nullable:false)
+        type: string
+      title:
+        description: |-
+          Post Title
+          @Column(type:varchar(400), nullable:false)
+        type: string
+    type: object
+  entity.User:
+    properties:
+      email:
+        description: |-
+          Company Email
+          @Column(type:varchar(400), nullable:false)
+        type: string
+      id:
+        description: |-
+          Company ID
+          @PrimaryKey
+          @Column(type:uuid, unique: true)
+        type: string
+      is_active:
+        description: |-
+          Company IsActive
+          @Column(type:boolean, default:true)
+        type: boolean
+      name:
+        description: |-
+          Company Name
+          @Column(type:varchar(400), nullable:false)
+        type: string
+      password:
+        description: |-
+          Company Phone
+          @Column(type:varchar(400), nullable:false)
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Gin Swagger Example API
+  version: "2.0"
+paths:
+  /company/post:
+    get:
+      consumes:
+      - '*/*'
+      description: All Post from the app that has been posted
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Post'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: All Post from the app that has been posted
+      tags:
+      - Company
+  /company/post/:id:
+    get:
+      consumes:
+      - '*/*'
+      description: All Post from the app that has been posted
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Post'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: All Post from the app that has been posted
+      tags:
+      - Company
+  /company/user/:id:
+    get:
+      consumes:
+      - '*/*'
+      description: Retrieves detail one user
+      parameters:
+      - description: User Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Retrieves detail one user
+      tags:
+      - Company
+    patch:
+      consumes:
+      - '*/*'
+      description: Retrieves update point on one post
+      parameters:
+      - description: Post Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Post'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Retrieves update point on one post
+      tags:
+      - Company
+  /company/user/login:
+    get:
+      consumes:
+      - '*/*'
+      description: Retrieves the list of users who has to login in the app
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.User'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Retrieves the list of users who has to login in the app
+      tags:
+      - Company
+  /company/user/point:
+    get:
+      consumes:
+      - '*/*'
+      description: Retrieves all users point
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Retrieves all users point
+      tags:
+      - Company
+  /company/user/point/:id:
+    get:
+      consumes:
+      - '*/*'
+      description: Retrieves detail point from one user
+      parameters:
+      - description: User Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Retrieves detail point from one user
+      tags:
+      - Company
+  /company/user/register:
+    get:
+      consumes:
+      - '*/*'
+      description: Retrieves the list of users who has to register in the app
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.User'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Retrieves the list of users who has to register in the app
+      tags:
+      - Company
+  /form/login:
+    post:
+      consumes:
+      - '*/*'
+      description: Login for user and company company in the app
+      parameters:
+      - description: Company
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LoginDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Bearer {token}"}
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Login for user and company in the app
+      tags:
+      - Form
+  /form/register/company:
+    post:
+      consumes:
+      - '*/*'
+      description: Register company in the app
+      parameters:
+      - description: Company
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.Company'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/entity.Company'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Register company in the app
+      tags:
+      - Form
+  /form/register/user:
+    post:
+      consumes:
+      - '*/*'
+      description: Register user in the app
+      parameters:
+      - description: User
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/entity.User'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/entity.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Register user in the app
+      tags:
+      - Form
+  /post:
+    post:
+      consumes:
+      - '*/*'
+      description: Retrieves the list of users who has to register in the app
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/entity.Post'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Retrieves the list of users who has to register in the app
+      tags:
+      - Post
+  /post/:id:
+    get:
+      consumes:
+      - '*/*'
+      description: All Post from the app that has been posted
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Post'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: All Post from the app that has been posted
+      tags:
+      - Post
+    put:
+      consumes:
+      - '*/*'
+      description: All Post from the app that has been posted
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Post'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: All Post from the app that has been posted
+      tags:
+      - Post
+  /user/point:
+    get:
+      consumes:
+      - '*/*'
+      description: Retrieves all users point
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Retrieves all users point
+      tags:
+      - Users
+schemes:
+- http
+swagger: "2.0"
