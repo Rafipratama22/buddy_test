@@ -51,9 +51,6 @@ func MainSever() *Server {
 // @host localhost:8080
 // @BasePath /
 // @schemes http
-// @securityDefinitions.apikey ApiKeyAuth
-// @in header
-// @name Authurization
 func (server *Server) Start() *gin.Engine {
 	// Gin instance
 	route := gin.New()
@@ -78,6 +75,12 @@ func (server *Server) Start() *gin.Engine {
 		})
 		loginRoute.POST("/login", func(ctx *gin.Context) {
 			loginController.Login(ctx)
+		})
+		loginRoute.POST("/logout/company", authMiddleware.ValidateTokenCompany, func(c *gin.Context) {
+			loginController.LogOutCompany(c)
+		})
+		loginRoute.POST("/logout/user", authMiddleware.ValidateTokenUser, func(c *gin.Context) {
+			loginController.LogOutUser(c)
 		})
 	}
 

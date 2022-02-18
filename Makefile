@@ -8,3 +8,5 @@ docker-run:
 	sudo su docker run -p -d 8080:8080 buddy_test
 docker-compose:
 	sudo docker-compose up -d
+swag:
+	swag init

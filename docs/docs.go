@@ -80,6 +80,15 @@ const docTemplate_swagger = `{
                     "Company"
                 ],
                 "summary": "All Post from the app that has been posted",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Post ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -168,6 +177,15 @@ const docTemplate_swagger = `{
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "Point",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.PostPointDTO"
+                        }
                     }
                 ],
                 "responses": {
@@ -282,6 +300,13 @@ const docTemplate_swagger = `{
                 ],
                 "summary": "Retrieves detail point from one user",
                 "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Post Id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
                     {
                         "type": "string",
                         "description": "User Id",
@@ -403,7 +428,7 @@ const docTemplate_swagger = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/entity.Company"
+                            "$ref": "#/definitions/dto.RegisterCompany"
                         }
                     }
                 ],
@@ -443,7 +468,7 @@ const docTemplate_swagger = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/entity.User"
+                            "$ref": "#/definitions/dto.RegisterUser"
                         }
                     }
                 ],
@@ -452,6 +477,74 @@ const docTemplate_swagger = `{
                         "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/entity.User"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/logut/company": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Log Out Company in the app",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Form"
+                ],
+                "summary": "Log Out Company in the app",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.LogOutDto"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/dto.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/logut/user": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Log Out User in the app",
+                "consumes": [
+                    "*/*"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Form"
+                ],
+                "summary": "Log Out User in the app",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.LogOutDto"
                         }
                     },
                     "400": {
@@ -481,6 +574,17 @@ const docTemplate_swagger = `{
                     "Post"
                 ],
                 "summary": "Retrieves the list of users who has to register in the app",
+                "parameters": [
+                    {
+                        "description": "Post",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.PostDto"
+                        }
+                    }
+                ],
                 "responses": {
                     "201": {
                         "description": "Created",
@@ -515,6 +619,15 @@ const docTemplate_swagger = `{
                     "Post"
                 ],
                 "summary": "All Post from the app that has been posted",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Post ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -553,6 +666,17 @@ const docTemplate_swagger = `{
                     "Post"
                 ],
                 "summary": "All Post from the app that has been posted",
+                "parameters": [
+                    {
+                        "description": "Post",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.PostDto"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -619,6 +743,14 @@ const docTemplate_swagger = `{
                 }
             }
         },
+        "dto.LogOutDto": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
         "dto.LoginDto": {
             "type": "object",
             "required": [
@@ -634,6 +766,78 @@ const docTemplate_swagger = `{
                     "type": "string"
                 },
                 "role": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.PostDto": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "hashtag": {
+                    "type": "string"
+                },
+                "photo": {
+                    "type": "string"
+                },
+                "source": {
+                    "type": "string"
+                },
+                "thumbnail": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.PostPointDTO": {
+            "type": "object",
+            "required": [
+                "point"
+            ],
+            "properties": {
+                "point": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.RegisterCompany": {
+            "type": "object",
+            "required": [
+                "email",
+                "name",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.RegisterUser": {
+            "type": "object",
+            "required": [
+                "email",
+                "name",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
                     "type": "string"
                 }
             }
@@ -738,6 +942,13 @@ const docTemplate_swagger = `{
                     "type": "string"
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }`

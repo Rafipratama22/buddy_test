@@ -5,6 +5,11 @@ definitions:
       message:
         type: string
     type: object
+  dto.LogOutDto:
+    properties:
+      message:
+        type: string
+    type: object
   dto.LoginDto:
     properties:
       email:
@@ -17,6 +22,54 @@ definitions:
     - email
     - password
     - role
+    type: object
+  dto.PostDto:
+    properties:
+      content:
+        type: string
+      hashtag:
+        type: string
+      photo:
+        type: string
+      source:
+        type: string
+      thumbnail:
+        type: string
+      title:
+        type: string
+    type: object
+  dto.PostPointDTO:
+    properties:
+      point:
+        type: integer
+    required:
+    - point
+    type: object
+  dto.RegisterCompany:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+  dto.RegisterUser:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - name
+    - password
     type: object
   entity.Company:
     properties:
@@ -175,6 +228,12 @@ paths:
       consumes:
       - '*/*'
       description: All Post from the app that has been posted
+      parameters:
+      - description: Post ID
+        in: path
+        name: id
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -232,6 +291,12 @@ paths:
         name: id
         required: true
         type: integer
+      - description: Point
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.PostPointDTO'
       produces:
       - application/json
       responses:
@@ -302,6 +367,11 @@ paths:
       - '*/*'
       description: Retrieves detail point from one user
       parameters:
+      - description: Post Id
+        in: path
+        name: id
+        required: true
+        type: integer
       - description: User Id
         in: path
         name: id
@@ -383,7 +453,7 @@ paths:
         name: data
         required: true
         schema:
-          $ref: '#/definitions/entity.Company'
+          $ref: '#/definitions/dto.RegisterCompany'
       produces:
       - application/json
       responses:
@@ -409,7 +479,7 @@ paths:
         name: data
         required: true
         schema:
-          $ref: '#/definitions/entity.User'
+          $ref: '#/definitions/dto.RegisterUser'
       produces:
       - application/json
       responses:
@@ -424,11 +494,60 @@ paths:
       summary: Register user in the app
       tags:
       - Form
+  /logut/company:
+    post:
+      consumes:
+      - '*/*'
+      description: Log Out Company in the app
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.LogOutDto'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Log Out Company in the app
+      tags:
+      - Form
+  /logut/user:
+    post:
+      consumes:
+      - '*/*'
+      description: Log Out User in the app
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.LogOutDto'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Log Out User in the app
+      tags:
+      - Form
   /post:
     post:
       consumes:
       - '*/*'
       description: Retrieves the list of users who has to register in the app
+      parameters:
+      - description: Post
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.PostDto'
       produces:
       - application/json
       responses:
@@ -450,6 +569,12 @@ paths:
       consumes:
       - '*/*'
       description: All Post from the app that has been posted
+      parameters:
+      - description: Post ID
+        in: path
+        name: id
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -474,6 +599,13 @@ paths:
       consumes:
       - '*/*'
       description: All Post from the app that has been posted
+      parameters:
+      - description: Post
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.PostDto'
       produces:
       - application/json
       responses:
@@ -517,4 +649,9 @@ paths:
       - Users
 schemes:
 - http
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

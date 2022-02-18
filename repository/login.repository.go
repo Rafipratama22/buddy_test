@@ -3,6 +3,7 @@ package repository
 import (
 	"github.com/Rafipratama22/mnc_test.git/entity"
 	"github.com/Rafipratama22/mnc_test.git/middleware"
+	// "github.com/google/uuid"
 
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
@@ -13,8 +14,8 @@ type LoginRepository interface {
 	RegisterCompany(company entity.Company) (entity.Company, error)
 	LoginUser(email string, password string) (string, error)
 	LoginCompany(email string, password string) (string, error)
-	LogOutUser(email string) error
-	LogOutCompany(email string) error
+	LogOutUser(id string) error
+	LogOutCompany(id string) error
 }
 
 type loginRepository struct {
@@ -83,6 +84,7 @@ func (c *loginRepository) LoginCompany(email string, password string) (string, e
 	if err != nil {
 		return "" , err
 	}
+	
 	companyToken, err = middleware.CreateToken(company.ID)
 	if err != nil {
 		return "", err
@@ -90,9 +92,9 @@ func (c *loginRepository) LoginCompany(email string, password string) (string, e
 	return companyToken, nil
 }
 
-func (c *loginRepository) LogOutUser(email string) error {
+func (c *loginRepository) LogOutUser(id string) error {
 	var user entity.User
-	c.db.Where("email = ?", email).First(&user)
+	c.db.Where("id = ?", id).First(&user)
 	result := c.db.Model(&user).Update("is_active", false)
 	if result.Error != nil {
 		return result.Error
@@ -100,9 +102,9 @@ func (c *loginRepository) LogOutUser(email string) error {
 	return nil
 }
 
-func (c *loginRepository) LogOutCompany(email string) error {
+func (c *loginRepository) LogOutCompany(id string) error {
 	var company entity.Company
-	c.db.Where("email = ?", email).First(&company)
+	c.db.Where("id = ?", id).First(&company)
 	result := c.db.Model(&company).Update("is_active", false)
 	if result.Error != nil {
 		return result.Error

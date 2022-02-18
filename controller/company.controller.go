@@ -125,6 +125,7 @@ func (c *companyController) DetailUser(ctx *gin.Context) {
 // @Accept  */*
 // @Produce  json
 // @Security ApiKeyAuth
+// @Param id path integer true "Post Id"
 // @Param id path string true "User Id"
 // @Success 200 {integer} point
 // @Failure 400 {object} dto.ErrorResponse
@@ -150,6 +151,7 @@ func (c *companyController) DetailUserPoint(ctx *gin.Context) {
 // @Produce  json
 // @Security ApiKeyAuth
 // @Param id path integer true "Post Id"
+// @Param data body dto.PostPointDTO true "Point"
 // @Success 200 {object} entity.Post 
 // @Failure 400 {object} dto.ErrorResponse
 // @Failure 500 {object} dto.ErrorResponse
@@ -202,6 +204,7 @@ func (c *companyController) AllPost(ctx *gin.Context) {
 // @Accept  */*
 // @Produce  json
 // @Security ApiKeyAuth
+// @Param id path int true "Post ID"
 // @Success 200 {object} entity.Post
 // @Failure 400 {object} dto.ErrorResponse
 // @Failure 500 {object} dto.ErrorResponse

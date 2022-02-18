@@ -32,6 +32,10 @@ func init() {
 // @host localhost:8080
 // @BasePath /
 // @schemes http
+
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
 func main() {
 	route := routing.Start()
 	route.Run(":8080")
